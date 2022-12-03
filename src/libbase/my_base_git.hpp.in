@@ -1,0 +1,21 @@
+/**
+ * @file    my_basic_git.hpp.in
+ * @author  Cheon Younghoe
+ */
+
+#ifndef MY_BASIC_GIT_H
+#define MY_BASIC_GIT_H
+
+#include <string>
+#include <memory>
+
+namespace my::basic
+{
+    const std::string   k_git_branch        = "@GIT_BRANCH@";
+    const std::string   k_git_commit_hash   = "@GIT_COMMIT_HASH@";
+
+    std::string         get_git_branch();
+    std::string         get_git_commit_hash();
+}
+
+#endif // MY_BASIC_GIT_H

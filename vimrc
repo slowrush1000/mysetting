@@ -1,3 +1,4 @@
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -172,15 +173,18 @@ if has("gui_running")
 "        set guifont    =굴림체:h9:cHANGEUL
 "        set guifont    =GulimChe:h9:cHANGEUL
     elseif has("unix")
-        set guifont    =D2Coding\ 11
+        set guifont    =D2Coding\ 10
+"        set guifont    =D2Coding\ ligature\ 10
 "        set guifont    =나눔고딕코딩\ 12
 "        set guifont    =나눔고딕코딩\ bold\ 11
-"        set guifontwide=나눔고딕코딩\ bold\ 12
-"        set guifontwide=나눔고딕코딩\ 12
-"        set guifontwide=Noto\ Mono\ CJK\ KR\ Regular\ 11
-"        set guifont    =Noto\ Sans\ Mono\ CJK\ KR\ Regular\ 11
-"        set guifont    =D2Coding\ ligature\ 11
-"        set guifontwide=D2Coding\ bold\ 12
+"        set guifont    =나눔고딕코딩\ bold\ 12
+"        set guifont    =나눔고딕코딩\ 12
+"        set guifont    =Noto\ Mono\ CJK\ KR\ Regular\ 10
+"        set guifont    =Noto\ Sans\ Mono\ CJK\ KR\ Regular\ 10
+"        set guifont    =IBM\ Plex\ Mono\ Regular\ 10
+"        set guifont    =Hack\ Regular\ 10
+"        set guifont    =Cascadia\ Code\ Regular\ 10
+"        set guifont    =Cascadia\ Mono\ Regular\ 10
 "        set guifont    =monospace\ 8
 "        set guifont    =terminus\ 8
 "        set guifont    =Consolas\ 8
@@ -191,6 +195,7 @@ if has("gui_running")
 "        set guifontwide=나눔고딕\ 8
 "        set guifontwide=다음\ 8
 "        set guifontwide=조선일보명조\ 8
+"        set guifontwide=D2Coding\ bold\ 12
     endif
 "    set guifont    =Jung9\ 9
 "    set guifont    =Fixedsys:h12:cHANGEUL
@@ -211,3 +216,4 @@ set autoindent
 " ctags
 " https://rderik.com/blog/ctags-vim-multiple-projects/
 "set tags=./tags,/media/PROJECT02/project/RailAdvisor5/tags
+

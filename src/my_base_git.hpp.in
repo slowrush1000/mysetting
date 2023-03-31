@@ -1,0 +1,27 @@
+/**
+ * @file    yh_base_git.hpp.in
+ * @author  Cheon Younghoe
+ */
+
+#ifndef YH_BASE_GIT_H
+#define YH_BASE_GIT_H
+
+#include <string>
+
+namespace yh
+{
+    const std::string   k_git_branch        = "@GIT_BRANCH@";
+    const std::string   k_git_commit_hash   = "@GIT_COMMIT_HASH@";
+
+	class Git
+	{
+		public:
+			Git() = default;
+			virtual ~Git();
+
+    		static std::string  get_git_branch();
+            static std::string  get_git_commit_hash();
+	};
+}
+
+#endif // YH_BASE_GIT_H

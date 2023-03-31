@@ -3,7 +3,7 @@
  * @author  Cheon Younghoe
  */
 
-#include "yh_base_main.test.hpp"
+#include "main.test.hpp"
 
 int
 main()

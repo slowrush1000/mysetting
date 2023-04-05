@@ -18,7 +18,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED             ON)
 #set(TOMLPLUSPLUS_DIR                        "extern/tomlplusplus")
 #add_subdirectory(${TOMLPLUSPLUS_DIR})
 
-#add_subdirectory(src/libbasic)
 add_subdirectory(src)
 add_subdirectory(doc)
 

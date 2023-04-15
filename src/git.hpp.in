@@ -1,27 +1,9 @@
-/**
- * @file    my_git.hpp.in
- * @author  Cheon Younghoe
- */
-
 #ifndef MY_GIT_H
 #define MY_GIT_H
-
 #include <string>
-
 namespace my
 {
-    const std::string   kGitBranch          = "@GIT_BRANCH@";
-    const std::string   kGitCommitHash      = "@GIT_COMMIT_HASH@";
-
-	class Git
-	{
-		public:
-			Git() = default;
-			virtual ~Git();
-
-    		static std::string  getGitBranch();
-            static std::string  getGitCommitHash();
-	};
+    const std::string   k_git_branch        = "@GIT_BRANCH@";
+    const std::string   k_git_commit_hash   = "@GIT_COMMIT_HASH@";
 }
-
 #endif // MY_GIT_H

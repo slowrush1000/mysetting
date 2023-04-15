@@ -2,6 +2,7 @@
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
     "doxdocgen.generic.authorName": "Cheon Younghoe",
+    "cmake.configureOnOpen": false,
     //"astyle.astylerc": '${workspaceRoot}/.vscode/astylerc',
     //"C_Cpp.formatting": "disabled",
 }

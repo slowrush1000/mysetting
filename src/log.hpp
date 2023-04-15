@@ -1,58 +1,84 @@
-
 #ifndef MY_LOG_H
 #define MY_LOG_H
-
+#include "spdlog/common.h"
+#include "spdlog/sinks/basic_file_sink.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
+#include "spdlog/spdlog.h"
 #include <memory>
 #include <string>
-#include "spdlog/common.h"
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
-#include "spdlog/sinks/basic_file_sink.h"
-
 namespace my
 {
-    const std::string   kDefaultLoggerName      = std::string("my");
-    const std::string   kLogFileName            = std::string("my.log");
+    const std::string k_default_logger_name = std::string("my");
+    const std::string k_log_filename        = std::string("my.log");
 #ifdef NDEBUG
-    const std::string   kLogPattern             = std::string("%v");
+    const std::string k_log_pattern = std::string("%v");
 #else
-    const std::string   kLogPattern             = std::string("%+");
+    const std::string k_log_pattern = std::string("%+");
 #endif // NDEBUG
 
-	class Log
-	{
-		public:
+    class Log;
+    using pLog = std::shared_ptr<Log>;
+
+    class Log
+    {
+        public:
             Log();
-            Log(const std::string& loggerName, const std::string& logFileName);
+            Log(const std::string& logger_name, const std::string& log_filename);
             virtual ~Log();
 
-            static std::shared_ptr<spdlog::logger>  getDefaultLogger(const std::string& defaultLoggerName = kDefaultLoggerName);
-            void                                setLoggerName(const std::string& logFileName);
-            const std::string&                  getLoggerName() const;
-            void                                setLogFileName(const std::string& logFileName);
-            const std::string&                  getLogFileName() const;
+            static std::shared_ptr<spdlog::logger> default_logger(
+                const std::string& default_logger_name = k_default_logger_name);
+            void set_logger_name(const std::string& log_filename);
+            const std::string& logger_name() const;
+            void set_log_filename(const std::string& log_filename);
+            const std::string& log_filename() const;
 
-            void                                changeLogLevel(const spdlog::level::level_enum logLevel);
+            void change_logLevel(const spdlog::level::level_enum log_level);
 
-            void                                setTrace()    { this->changeLogLevel(spdlog::level::trace); }
-            void                                setDebug()    { this->changeLogLevel(spdlog::level::debug); }
-            void                                setInfo()     { this->changeLogLevel(spdlog::level::info); }
-            void                                setWarn()     { this->changeLogLevel(spdlog::level::warn); }
-            void                                setError()    { this->changeLogLevel(spdlog::level::err); }
-            void                                setCritical() { this->changeLogLevel(spdlog::level::critical); }
-            void                                setOff()      { this->changeLogLevel(spdlog::level::off); }
+            void
+            set_trace()
+            {
+                this->change_logLevel(spdlog::level::trace);
+            }
+            void
+            set_debug()
+            {
+                this->change_logLevel(spdlog::level::debug);
+            }
+            void
+            set_info()
+            {
+                this->change_logLevel(spdlog::level::info);
+            }
+            void
+            set_warn()
+            {
+                this->change_logLevel(spdlog::level::warn);
+            }
+            void
+            set_error()
+            {
+                this->change_logLevel(spdlog::level::err);
+            }
+            void
+            set_critical()
+            {
+                this->change_logLevel(spdlog::level::critical);
+            }
+            void
+            set_off()
+            {
+                this->change_logLevel(spdlog::level::off);
+            }
 
         private:
-            std::shared_ptr<spdlog::logger>     mLogger         = nullptr;
-            std::string                         mLoggerName     = kDefaultLoggerName;
-            std::string                         mLogFileName    = kLogFileName;
-            std::string                         mLogPattern     = kLogPattern;
-            spdlog::level::level_enum           mLogLevel       = spdlog::level::info;
-            std::shared_ptr<spdlog::sinks::stdout_color_sink_mt>    mConsoleSink  = nullptr;
-            std::shared_ptr<spdlog::sinks::basic_file_sink_mt>      mFileSink     = nullptr;
-	};
-
-    using pLog  = std::shared_ptr<Log>;
-}
-
+            std::shared_ptr<spdlog::logger> m_logger                            = nullptr;
+            std::string m_logger_name                                           = k_default_logger_name;
+            std::string m_log_filename                                          = k_log_filename;
+            std::string m_log_pattern                                           = k_log_pattern;
+            spdlog::level::level_enum m_log_level                               = spdlog::level::info;
+            std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> m_console_sink = nullptr;
+            std::shared_ptr<spdlog::sinks::basic_file_sink_mt> m_file_sink      = nullptr;
+    };
+} // namespace my
 #endif // MY_LOG_H

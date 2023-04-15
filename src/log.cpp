@@ -1,4 +1,3 @@
-
 #include "log.hpp"
 #include <iostream>
 
@@ -6,21 +5,21 @@ my::Log::Log()
 {
     try
     {
-        mConsoleSink    = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-        mConsoleSink->set_pattern(mLogPattern);
-        mConsoleSink->set_level(mLogLevel);
+        m_console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+        m_console_sink->set_pattern(m_log_pattern);
+        m_console_sink->set_level(m_log_level);
 
-        mFileSink       = std::make_shared<spdlog::sinks::basic_file_sink_mt>(mLogFileName, true);
-        mFileSink->set_pattern(mLogPattern);
-        mFileSink->set_level(mLogLevel);
+        m_file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(m_log_filename, true);
+        m_file_sink->set_pattern(m_log_pattern);
+        m_file_sink->set_level(m_log_level);
 
-        spdlog::sinks_init_list sinks   = { mConsoleSink, mFileSink };
+        spdlog::sinks_init_list sinks = {m_console_sink, m_file_sink};
 
-        mLogger         = std::make_shared<spdlog::logger>(mLoggerName, sinks);
-        mLogger->set_pattern(mLogPattern);
-        mLogger->set_level(mLogLevel);
+        m_logger                      = std::make_shared<spdlog::logger>(m_logger_name, sinks);
+        m_logger->set_pattern(m_log_pattern);
+        m_logger->set_level(m_log_level);
 
-        spdlog::set_default_logger(mLogger);
+        spdlog::set_default_logger(m_logger);
     }
     catch (const spdlog::spdlog_ex& ex)
     {
@@ -29,25 +28,27 @@ my::Log::Log()
     }
 }
 
-my::Log::Log(const std::string& loggerName, const std::string& logFileName) : mLoggerName(loggerName), mLogFileName(logFileName)
+my::Log::Log(const std::string& _logger_name, const std::string& log_filename)
+    : m_logger_name(_logger_name)
+    , m_log_filename(log_filename)
 {
     try
     {
-        mConsoleSink    = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-        mConsoleSink->set_pattern(mLogPattern);
-        mConsoleSink->set_level(mLogLevel);
+        m_console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+        m_console_sink->set_pattern(m_log_pattern);
+        m_console_sink->set_level(m_log_level);
 
-        mFileSink       = std::make_shared<spdlog::sinks::basic_file_sink_mt>(mLogFileName, true);
-        mFileSink->set_pattern(mLogPattern);
-        mFileSink->set_level(mLogLevel);
+        m_file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(m_log_filename, true);
+        m_file_sink->set_pattern(m_log_pattern);
+        m_file_sink->set_level(m_log_level);
 
-        spdlog::sinks_init_list sink_lists  = { mConsoleSink, mFileSink };
+        spdlog::sinks_init_list sink_lists = {m_console_sink, m_file_sink};
 
-        mLogger         = std::make_shared<spdlog::logger>(mLoggerName, sink_lists);
-        mLogger->set_pattern(mLogPattern);
-        mLogger->set_level(mLogLevel);
+        m_logger                           = std::make_shared<spdlog::logger>(m_logger_name, sink_lists);
+        m_logger->set_pattern(m_log_pattern);
+        m_logger->set_level(m_log_level);
 
-        spdlog::set_default_logger(mLogger);
+        spdlog::set_default_logger(m_logger);
     }
     catch (const spdlog::spdlog_ex& ex)
     {
@@ -60,45 +61,45 @@ my::Log::~Log()
 {
 }
 
-std::shared_ptr<spdlog::logger>  
-my::Log::getDefaultLogger(const std::string& defaultLoggerName)
+std::shared_ptr<spdlog::logger>
+my::Log::default_logger(const std::string& default_logger_name)
 {
-    return spdlog::get(defaultLoggerName);
+    return spdlog::get(default_logger_name);
 }
 
-void                                
-my::Log::setLoggerName(const std::string& loggerName)
+void
+my::Log::set_logger_name(const std::string& logger_name)
 {
-    mLoggerName = loggerName;
+    m_logger_name = logger_name;
 }
 
-const std::string&                  
-my::Log::getLoggerName() const
+const std::string&
+my::Log::logger_name() const
 {
-    return mLoggerName;
+    return m_logger_name;
 }
 
-void                                
-my::Log::setLogFileName(const std::string& logFileName)
+void
+my::Log::set_log_filename(const std::string& log_filename)
 {
-    mLogFileName    = logFileName;
+    m_log_filename = log_filename;
 }
 
-const std::string&                  
-my::Log::getLogFileName() const
+const std::string&
+my::Log::log_filename() const
 {
-    return mLogFileName;
+    return m_log_filename;
 }
 
-void                                
-my::Log::changeLogLevel(const spdlog::level::level_enum logLevel)
+void
+my::Log::change_log_level(const spdlog::level::level_enum log_level)
 {
-    if ((nullptr != mLogger) && (nullptr != mFileSink) && (nullptr != mConsoleSink))
+    if ((nullptr != m_logger) && (nullptr != m_file_sink) && (nullptr != m_console_sink))
     {
-        mLogLevel = logLevel;
+        m_log_level = log_level;
 
-        mConsoleSink->set_level(logLevel);
-        mFileSink->set_level(logLevel);
-        mLogger->set_level(logLevel);
+        m_console_sink->set_level(log_level);
+        m_file_sink->set_level(log_level);
+        m_logger->set_level(log_level);
     }
 }

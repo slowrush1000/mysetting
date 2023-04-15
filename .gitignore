@@ -18,4 +18,4 @@ doc/latex/
 install/
 src/tags
 src/*.sw*
-src/spftool3_git.hpp
+src/git.hpp

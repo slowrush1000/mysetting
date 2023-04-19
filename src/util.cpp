@@ -1,4 +1,5 @@
-#include "util.hpp"
+
+#include "myname_util.hpp"
 #include <algorithm>
 #include <cctype>
 #include <chrono>
@@ -9,55 +10,55 @@
 #include <unistd.h>
 
 std::string
-my::get_current_time()
+myname::get_current_time()
 {
     auto today     = std::chrono::system_clock::now();
     auto tt        = std::chrono::system_clock::to_time_t(today);
     auto ctime_str = std::string(std::ctime(&tt));
 
-    my::change_str(ctime_str, std::string("\n"), std::string(""));
+    myname::change_str(ctime_str, std::string("\n"), std::string(""));
 
     return ctime_str;
 }
 
 std::string
-my::get_current_dir()
+myname::get_current_dir()
 {
-    auto currentPath = my::fs_tt::current_path();
+    auto currentPath = myname::fs_tt::current_path();
 
     return currentPath.native();
 }
 
 std::string
-my::get_user()
+myname::get_user()
 {
-    char user[my::k_buffer_size_1k];
+    char user[myname::k_buffer_size_1k];
 
-    if (0 == getlogin_r(user, my::k_buffer_size_1k))
+    if (0 == getlogin_r(user, myname::k_buffer_size_1k))
         return std::string(user);
     else
         return std::string("");
 }
 
 std::string
-my::get_host_name()
+myname::get_host_name()
 {
-    char host_name[my::k_buffer_size_1k];
+    char host_name[myname::k_buffer_size_1k];
 
-    if (0 == gethostname(host_name, my::k_buffer_size_1k))
+    if (0 == gethostname(host_name, myname::k_buffer_size_1k))
         return std::string(host_name);
     else
         return std::string("");
 }
 
 int
-my::get_process_id()
+myname::get_process_id()
 {
     return getpid();
 }
 
 std::string
-my::get_os_version()
+myname::get_os_version()
 {
     struct utsname buf;
 
@@ -72,7 +73,7 @@ my::get_os_version()
 }
 
 std::string
-my::get_cpu_info()
+myname::get_cpu_info()
 {
     const std::string k_cpu_info_filename = std::string("/proc/cpuinfo");
 
@@ -92,7 +93,7 @@ my::get_cpu_info()
 
     while (std::getline(file, line))
     {
-        my::tokenize(line, tokens, delims);
+        myname::tokenize(line, tokens, delims);
 
         if (true == tokens.empty())
         {
@@ -129,7 +130,7 @@ my::get_cpu_info()
 }
 
 void
-my::change_str(std::string& str, const std::string& from, const std::string& to)
+myname::change_str(std::string& str, const std::string& from, const std::string& to)
 {
     if (true == from.empty())
     {
@@ -145,7 +146,7 @@ my::change_str(std::string& str, const std::string& from, const std::string& to)
 }
 
 void
-my::tokenize(std::string_view str, std::vector<std::string>& tokens, std::string_view delims)
+myname::tokenize(std::string_view str, std::vector<std::string>& tokens, std::string_view delims)
 {
     tokens.clear();
 
@@ -162,41 +163,41 @@ my::tokenize(std::string_view str, std::vector<std::string>& tokens, std::string
 }
 
 void
-my::set_casesensitive(std::string& str, const bool casesensitive)
+myname::set_casesensitive(std::string& str, const bool casesensitive)
 {
     if (false == casesensitive)
-        my::toLower_str(str);
+        myname::toLower_str(str);
 }
 
 void
-my::toUpper_str(std::string& str)
+myname::toUpper_str(std::string& str)
 {
     std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::toupper(c); });
 }
 
 void
-my::toLower_str(std::string& str)
+myname::toLower_str(std::string& str)
 {
     std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::tolower(c); });
 }
 
 bool
-my::is_equal(const std::string& str1, const std::string& str2, const bool casesensitive)
+myname::is_equal(const std::string& str1, const std::string& str2, const bool casesensitive)
 {
     if (true == casesensitive)
-        return my::is_equal_casesensitive(str1, str2);
+        return myname::is_equal_casesensitive(str1, str2);
     else
-        return my::is_equal_incasesensitive(str1, str2);
+        return myname::is_equal_incasesensitive(str1, str2);
 }
 
 bool
-my::is_equal_casesensitive(const std::string& str1, const std::string& str2)
+myname::is_equal_casesensitive(const std::string& str1, const std::string& str2)
 {
     return str1 == str2;
 }
 
 bool
-my::is_equal_incasesensitive(const std::string& str1, const std::string& str2)
+myname::is_equal_incasesensitive(const std::string& str1, const std::string& str2)
 {
     return std::equal(str1.begin(),
                       str1.end(),
@@ -206,28 +207,28 @@ my::is_equal_incasesensitive(const std::string& str1, const std::string& str2)
 }
 
 bool
-my::is_equal(const unsigned char str1, const unsigned char str2, const bool casesensitive)
+myname::is_equal(const unsigned char str1, const unsigned char str2, const bool casesensitive)
 {
     if (true == casesensitive)
-        return my::is_equal(str1, str2);
+        return myname::is_equal(str1, str2);
     else
-        return my::is_equal_incasesensitive(str1, str2);
+        return myname::is_equal_incasesensitive(str1, str2);
 }
 
 bool
-my::is_equal_casesensitive(const unsigned char str1, const unsigned char str2)
+myname::is_equal_casesensitive(const unsigned char str1, const unsigned char str2)
 {
     return str1 == str2;
 }
 
 bool
-my::is_equal_incasesensitive(const unsigned char str1, const unsigned char str2)
+myname::is_equal_incasesensitive(const unsigned char str1, const unsigned char str2)
 {
     return tolower(str1) == tolower(str2);
 }
 
 bool
-my::is_equal(const float f1, const float f2, const float max_rel_diff)
+myname::is_equal(const float f1, const float f2, const float max_rel_diff)
 {
     float diff    = fabsf(f1 - f2);
     float ff1     = fabsf(f1);
@@ -246,7 +247,7 @@ my::is_equal(const float f1, const float f2, const float max_rel_diff)
 }
 
 bool
-my::is_equal(const double d1, const double d2, const double max_rel_diff)
+myname::is_equal(const double d1, const double d2, const double max_rel_diff)
 {
     double diff    = fabs(d1 - d2);
     double fd1     = fabs(d1);
@@ -265,7 +266,7 @@ my::is_equal(const double d1, const double d2, const double max_rel_diff)
 }
 
 std::string
-my::makeLine(const std::vector<std::string>& tokens,
+myname::make_line(const std::vector<std::string>& tokens,
              const std::size_t from_pos,
              const std::size_t to_pos,
              const std::string& delims)
@@ -282,7 +283,7 @@ my::makeLine(const std::vector<std::string>& tokens,
 
 // TODO
 double
-my::atof2(const std::string& str)
+myname::atof2(const std::string& str)
 {
     return std::atof(str.c_str());
 }

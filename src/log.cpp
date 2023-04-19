@@ -1,7 +1,8 @@
-#include "log.hpp"
+
+#include "myname_log.hpp"
 #include <iostream>
 
-my::Log::Log()
+myname::Log::Log()
 {
     try
     {
@@ -28,7 +29,7 @@ my::Log::Log()
     }
 }
 
-my::Log::Log(const std::string& _logger_name, const std::string& log_filename)
+myname::Log::Log(const std::string& _logger_name, const std::string& log_filename)
     : m_logger_name(_logger_name)
     , m_log_filename(log_filename)
 {
@@ -57,42 +58,42 @@ my::Log::Log(const std::string& _logger_name, const std::string& log_filename)
     }
 }
 
-my::Log::~Log()
+myname::Log::~Log()
 {
 }
 
 std::shared_ptr<spdlog::logger>
-my::Log::default_logger(const std::string& default_logger_name)
+myname::Log::default_logger(const std::string& default_logger_name)
 {
     return spdlog::get(default_logger_name);
 }
 
 void
-my::Log::set_logger_name(const std::string& logger_name)
+myname::Log::set_logger_name(const std::string& logger_name)
 {
     m_logger_name = logger_name;
 }
 
 const std::string&
-my::Log::logger_name() const
+myname::Log::logger_name() const
 {
     return m_logger_name;
 }
 
 void
-my::Log::set_log_filename(const std::string& log_filename)
+myname::Log::set_log_filename(const std::string& log_filename)
 {
     m_log_filename = log_filename;
 }
 
 const std::string&
-my::Log::log_filename() const
+myname::Log::log_filename() const
 {
     return m_log_filename;
 }
 
 void
-my::Log::change_log_level(const spdlog::level::level_enum log_level)
+myname::Log::change_log_level(const spdlog::level::level_enum log_level)
 {
     if ((nullptr != m_logger) && (nullptr != m_file_sink) && (nullptr != m_console_sink))
     {

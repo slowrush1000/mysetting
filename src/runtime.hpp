@@ -1,8 +1,11 @@
-#ifndef MY_RUNTIME_H
-#define MY_RUNTIME_H
+
+#ifndef MYNAME_RUNTIME_H
+#define MYNAME_RUNTIME_H
+
 #include <chrono>
 #include <memory>
-namespace my
+
+namespace myname
 {
     class Runtime;
     using pRuntime = std::shared_ptr<Runtime>;
@@ -26,6 +29,5 @@ namespace my
             std::chrono::time_point<std::chrono::high_resolution_clock> m_wall_time;
     };
 
-} // namespace my
-
-#endif // MY_RUNTIME_H
+} // namespace myname
+#endif // MYNAME_RUNTIME_H

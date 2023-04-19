@@ -1,32 +1,33 @@
-#include "runtime.hpp"
+
+#include "myname_runtime.hpp"
 #include <fmt/printf.h>
 #include <sys/resource.h>
 #include <sys/time.h>
 
-my::Runtime::Runtime()
+myname::Runtime::Runtime()
 {
     m_cpu_time  = std::clock();
     m_wall_time = std::chrono::high_resolution_clock::now();
 }
 
-my::Runtime::~Runtime()
+myname::Runtime::~Runtime()
 {
 }
 
 double
-my::Runtime::cpu_time_secs()
+myname::Runtime::cpu_time_secs()
 {
     return double(std::clock() - m_cpu_time) / double(CLOCKS_PER_SEC);
 }
 
 double
-my::Runtime::wall_time_secs()
+myname::Runtime::wall_time_secs()
 {
     return std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - m_wall_time).count();
 }
 
 std::size_t
-my::Runtime::peak_rss_bytes()
+myname::Runtime::peak_rss_bytes()
 {
 #if defined(_WIN32)
     /* Windows -------------------------------------------------- */
@@ -67,7 +68,7 @@ my::Runtime::peak_rss_bytes()
 }
 
 std::size_t
-my::Runtime::current_rss_bytes()
+myname::Runtime::current_rss_bytes()
 {
 #if defined(_WIN32)
     /* Windows -------------------------------------------------- */
@@ -109,13 +110,13 @@ my::Runtime::current_rss_bytes()
 }
 
 std::string
-my::Runtime::str()
+myname::Runtime::str()
 {
-    std::string runtimeStr = fmt::sprintf("cpu %.1f secs, wall %.1f secs, peak %.1f MB, current %.1f MB",
+    auto str = fmt::sprintf("cpu %.1f secs, wall %.1f secs, peak %.1f MB, current %.1f MB",
                                           this->cpu_time_secs(),
                                           this->wall_time_secs(),
                                           this->peak_rss_bytes() / 1.0e6,
                                           this->current_rss_bytes() / 1.0e6);
 
-    return runtimeStr;
+    return str;
 }

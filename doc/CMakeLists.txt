@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.18.0)
-project(myProject_doc)
+project(myname)
 #
 set(DOC_DIR                                 "${CMAKE_SOURCE_DIR}/doc")
 set(DOXYGEN_CONF_FILE                       "doxygen.conf")

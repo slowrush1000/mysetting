@@ -1,12 +1,14 @@
 
-#ifndef MY_UTIL_H
-#define MY_UTIL_H
+#ifndef MYNAME_UTIL_H
+#define MYNAME_UTIL_H
+
 #include <cfloat>
 #include <filesystem>
 #include <string>
 #include <string_view>
 #include <vector>
-namespace my
+
+namespace myname
 {
     namespace fs_tt                    = std::filesystem;
     const std::size_t k_buffer_size_1k = 1024;
@@ -37,5 +39,5 @@ namespace my
                           const std::string& delims = std::string(" "));
     // TODO
     double atof2(const std::string& str);
-} // namespace my
-#endif // MY_UTIL_H
+} // namespace myname
+#endif // MYNAME_UTIL_H

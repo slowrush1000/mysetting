@@ -1,9 +1,32 @@
 #!/bin/csh -f
 
-set PROGRAM = "PWL"
-set program = "pwl"
+set MY      = "PWL"
+set my      = "pwl"
 
-cd  src
+#
+set     files   = "CMakeLists.txt"
+foreach file (${files})
+    sed -e s/myname/${program}/g ${file} > 1
+    mv -f 1 ${file}
+end
+
+#
+cd doc
+    set files   = "CMakeLists.txt doxygen.conf"
+    foreach file (${files})
+        sed -e s/myname/${program}/g ${file} > 1
+        mv -f 1 ${file}
+    end
+cd ..
+
+#
+cd src
+    set     files   = `ls *`
+    foreach file (${files})
+        sed -e s/myname/${program}/g ${file} > 1
+        sed -e s/MYNAME/${PROGRAM}/g 1 > ${file}
+    end
+
     set     files   = `ls *.hpp.in`
     foreach file (${files})
         set output  = `basename ${file} .hpp.in`
@@ -22,9 +45,4 @@ cd  src
         mv ${file} ${program}_${output}.cpp
     end
 
-    set     files   = `ls *`
-    foreach file (${files})
-        sed -e s/my/${program}/g ${file} > 1
-        sed -e s/MY/${PROGRAM}/g 1 > ${file}
-    end
-cd  ..
+cd ..

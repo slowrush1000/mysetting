@@ -1,8 +1,8 @@
-#ifndef MY_VERSION_H
-#define MY_VERSION_H
+#ifndef MYNAME_VERSION_H
+#define MYNAME_VERSION_H
 #include <memory>
 #include <string>
-namespace my
+namespace myname
 {
     class Version;
     using pVersion = std::shared_ptr<Version>;
@@ -37,5 +37,5 @@ namespace my
             std::string m_build_date = std::string(__DATE__);
             std::string m_build_time = std::string(__TIME__);
     };
-} // namespace my
-#endif // MY_VERSION_H
+} // namespace myname
+#endif // MYNAME_VERSION_H

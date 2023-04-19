@@ -1,15 +1,18 @@
-#ifndef MY_LOG_H
-#define MY_LOG_H
+
+#ifndef MYNAME_LOG_H
+#define MYNAME_LOG_H
+
 #include "spdlog/common.h"
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/spdlog.h"
 #include <memory>
 #include <string>
-namespace my
+
+namespace myname
 {
-    const std::string k_default_logger_name = std::string("my");
-    const std::string k_log_filename        = std::string("my.log");
+    const std::string k_default_logger_name = std::string("myname");
+    const std::string k_log_filename        = std::string("myname.log");
 #ifdef NDEBUG
     const std::string k_log_pattern = std::string("%v");
 #else
@@ -33,42 +36,42 @@ namespace my
             void set_log_filename(const std::string& log_filename);
             const std::string& log_filename() const;
 
-            void change_logLevel(const spdlog::level::level_enum log_level);
+            void change_log_level(const spdlog::level::level_enum log_level);
 
             void
             set_trace()
             {
-                this->change_logLevel(spdlog::level::trace);
+                this->change_log_level(spdlog::level::trace);
             }
             void
             set_debug()
             {
-                this->change_logLevel(spdlog::level::debug);
+                this->change_log_level(spdlog::level::debug);
             }
             void
             set_info()
             {
-                this->change_logLevel(spdlog::level::info);
+                this->change_log_level(spdlog::level::info);
             }
             void
             set_warn()
             {
-                this->change_logLevel(spdlog::level::warn);
+                this->change_log_level(spdlog::level::warn);
             }
             void
             set_error()
             {
-                this->change_logLevel(spdlog::level::err);
+                this->change_log_level(spdlog::level::err);
             }
             void
             set_critical()
             {
-                this->change_logLevel(spdlog::level::critical);
+                this->change_log_level(spdlog::level::critical);
             }
             void
             set_off()
             {
-                this->change_logLevel(spdlog::level::off);
+                this->change_log_level(spdlog::level::off);
             }
 
         private:
@@ -80,5 +83,5 @@ namespace my
             std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> m_console_sink = nullptr;
             std::shared_ptr<spdlog::sinks::basic_file_sink_mt> m_file_sink      = nullptr;
     };
-} // namespace my
-#endif // MY_LOG_H
+} // namespace myname
+#endif // MYNAME_LOG_H

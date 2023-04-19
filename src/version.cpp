@@ -1,7 +1,7 @@
 #include "version.hpp"
 #include <fmt/printf.h>
 
-my::Version::Version(const std::string program,
+myname::Version::Version(const std::string program,
                      const int major_version,
                      const int minor_version,
                      const int patch_version,
@@ -16,7 +16,7 @@ my::Version::Version(const std::string program,
 {
 }
 
-my::Version::Version(const my::Version& other)
+myname::Version::Version(const myname::Version& other)
 {
     m_program       = other.m_program;
     m_major_version = other.m_major_version;
@@ -26,48 +26,48 @@ my::Version::Version(const my::Version& other)
     m_build_time    = other.m_build_time;
 }
 
-my::Version::~Version()
+myname::Version::~Version()
 {
 }
 
 const std::string&
-my::Version::program() const
+myname::Version::program() const
 {
     return m_program;
 }
 
 int
-my::Version::major_version() const
+myname::Version::major_version() const
 {
     return m_major_version;
 }
 
 int
-my::Version::minor_version() const
+myname::Version::minor_version() const
 {
     return m_minor_version;
 }
 
 int
-my::Version::patch_version() const
+myname::Version::patch_version() const
 {
     return m_patch_version;
 }
 
 const std::string&
-my::Version::build_date() const
+myname::Version::build_date() const
 {
     return m_build_date;
 }
 
 const std::string&
-my::Version::build_time() const
+myname::Version::build_time() const
 {
     return m_build_time;
 }
 
 std::string
-my::Version::str()
+myname::Version::str()
 {
     std::string full_versionStr = fmt::sprintf("%s, %d.%d.%d, build at %s %s",
                                                m_program,

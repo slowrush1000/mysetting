@@ -23,15 +23,16 @@ namespace yh::util
     namespace fs_tt                    = std::filesystem;
     const std::size_t k_buffer_size_1k = 1024;
 
-    std::string get_current_time();
-    std::string get_current_dir();
-    std::string get_user();
-    std::string get_host_name();
-    int get_process_id();
-    std::string get_os_version();
-    std::string get_cpu_info();
+    std::string current_time();
+    std::string current_dir();
+    std::string user();
+    std::string host_name();
+    int process_id();
+    std::string os_version();
+    std::string cpu_info();
     void change_str(std::string& str, const std::string& from, const std::string& to);
-    void tokenize(std::string_view str, std::vector<std::string>& tokens, std::string_view delims = " ");
+    std::vector<std::string_view> tokenize(std::string_view str, std::string_view delims = " ");
+    // void tokenize(std::string_view str, std::vector<std::string>& tokens, std::string_view delims = " ");
     void set_casesensitive(std::string& str, const bool casesensitive);
     void to_upper_str(std::string& str);
     void to_lower_str(std::string& str);
@@ -47,6 +48,7 @@ namespace yh::util
                           const std::size_t from_pos,
                           const std::size_t to_pos,
                           const std::string& delims = std::string(" "));
+    bool is_gzfile(const std::string& filename);
     // TODO
     double atof2(const std::string& str);
 } // namespace yh::util

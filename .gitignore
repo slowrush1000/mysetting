@@ -9,6 +9,7 @@ build/docs/
 build/libs/
 build/release/
 build/src/
+build/test/
 build/.ninja*
 build/build.*
 build/cmake*
@@ -17,5 +18,8 @@ build/install_*
 docs/html/
 docs/latex/
 install/
+libs/*/src/*.sw*
+libs/*/include/*.sw*
+libs/*/include/util_git.hpp
 src/tags
 src/*.sw*

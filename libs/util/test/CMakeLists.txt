@@ -23,6 +23,7 @@ endif()
 set(PROJECT_TEST_MAIN_SOURCE                    "util_main.test.cpp")
 set(PROJECT_TEST_SOURCES                             
                                                 "util_git.test.cpp"
+                                                "util_util.test.cpp"
                                                 )
 
 # googletest : make & ./program_name.test.exe
@@ -34,6 +35,13 @@ target_link_libraries(${PROJECT_TEST_EXE_NAME}  ${PROJECT_LIB_NAME})
 target_link_libraries(${PROJECT_TEST_EXE_NAME}  ${GOOGLETEST_LIBRARIES})
 set_target_properties(${PROJECT_TEST_EXE_NAME}  PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${RUNTIME_OUTPUT_DIRECTORY})
 set_target_properties(${PROJECT_TEST_EXE_NAME}  PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${RUNTIME_OUTPUT_DIRECTORY})
+
+# fmt
+find_package(fmt)
+if(fmt_FOUND)
+    #    include_directories(${fmt_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_TEST_EXE_NAME} fmt::fmt)
+endif(fmt_FOUND)
 
 #enable_testing()
 #if (NOT (TARGET gtest AND TARGET gtest_main))

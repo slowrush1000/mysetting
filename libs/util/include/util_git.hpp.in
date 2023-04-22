@@ -18,6 +18,7 @@ namespace yh::util
 {
     const std::string k_git_branch      = "@GIT_BRANCH@";
     const std::string k_git_commit_hash = "@GIT_COMMIT_HASH@";
+    const std::string k_source_dir      = "@SOURCE_DIR@";
 } // namespace yh::util
 
 #endif // YH_UTIL_GIT_H

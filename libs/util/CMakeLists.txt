@@ -24,6 +24,12 @@ execute_process(
     OUTPUT_VARIABLE GIT_COMMIT_HASH
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
+execute_process(
+    COMMAND pwd
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE SOURCE_DIR
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
 
 configure_file(${CMAKE_SOURCE_DIR}/libs/util/include/${PROGRAM_NAME}_git.hpp.in ${CMAKE_SOURCE_DIR}/libs/util/include/${PROGRAM_NAME}_git.hpp)
 

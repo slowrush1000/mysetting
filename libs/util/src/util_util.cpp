@@ -13,14 +13,16 @@
 #include <algorithm>
 #include <cctype>
 #include <chrono>
+#include <cstdint>
 #include <cstdlib>
 #include <fmt/printf.h>
 #include <fstream>
+#include <iostream>
 #include <sys/utsname.h>
 #include <unistd.h>
 
 std::string
-yh::util::get_current_time()
+yh::util::current_time()
 {
     auto today     = std::chrono::system_clock::now();
     auto tt        = std::chrono::system_clock::to_time_t(today);
@@ -32,7 +34,7 @@ yh::util::get_current_time()
 }
 
 std::string
-yh::util::get_current_dir()
+yh::util::current_dir()
 {
     auto currentPath = yh::util::fs_tt::current_path();
 
@@ -40,7 +42,7 @@ yh::util::get_current_dir()
 }
 
 std::string
-yh::util::get_user()
+yh::util::user()
 {
     char user[yh::util::k_buffer_size_1k];
 
@@ -51,7 +53,7 @@ yh::util::get_user()
 }
 
 std::string
-yh::util::get_host_name()
+yh::util::host_name()
 {
     char host_name[yh::util::k_buffer_size_1k];
 
@@ -62,13 +64,13 @@ yh::util::get_host_name()
 }
 
 int
-yh::util::get_process_id()
+yh::util::process_id()
 {
     return getpid();
 }
 
 std::string
-yh::util::get_os_version()
+yh::util::os_version()
 {
     struct utsname buf;
 
@@ -83,7 +85,7 @@ yh::util::get_os_version()
 }
 
 std::string
-yh::util::get_cpu_info()
+yh::util::cpu_info()
 {
     const std::string k_cpu_info_filename = std::string("/proc/cpuinfo");
 
@@ -95,15 +97,16 @@ yh::util::get_cpu_info()
     }
 
     std::string line;
-    std::string delims = std::string(" \t\r\n");
-    std::vector<std::string> tokens;
+    std::string delims     = std::string(" \t\r\n");
+    // std::vector<std::string> tokens;
 
     std::string model_name = std::string("");
-    std::string cpuCores   = std::string("");
+    std::string cpu_cores  = std::string("");
 
     while (std::getline(file, line))
     {
-        yh::util::tokenize(line, tokens, delims);
+        auto tokens = yh::util::tokenize(line, delims);
+        // yh::util::tokenize(line, tokens, delims);
 
         if (true == tokens.empty())
         {
@@ -127,14 +130,14 @@ yh::util::get_cpu_info()
         {
             if (std::string("cores") == tokens[1])
             {
-                cpuCores = tokens[3];
+                cpu_cores = tokens[3];
             }
         }
     }
 
     file.close();
 
-    auto str = fmt::sprintf("%s, %s cores", model_name, cpuCores);
+    auto str = fmt::sprintf("%s, %s cores", model_name, cpu_cores);
 
     return str;
 }
@@ -155,6 +158,26 @@ yh::util::change_str(std::string& str, const std::string& from, const std::strin
     }
 }
 
+std::vector<std::string_view>
+yh::util::tokenize(std::string_view str, std::string_view delims)
+{
+    std::vector<std::string_view> tokens;
+
+    std::string::size_type last_pos = str.find_first_not_of(delims, 0);
+    std::string::size_type pos      = str.find_first_of(delims, last_pos);
+
+    while (std::string::npos != pos || std::string::npos != last_pos)
+    {
+        tokens.emplace_back(str.substr(last_pos, pos - last_pos));
+
+        last_pos = str.find_first_not_of(delims, pos);
+        pos      = str.find_first_of(delims, last_pos);
+    }
+
+    return tokens;
+}
+
+/*
 void
 yh::util::tokenize(std::string_view str, std::vector<std::string>& tokens, std::string_view delims)
 {
@@ -171,6 +194,7 @@ yh::util::tokenize(std::string_view str, std::vector<std::string>& tokens, std::
         pos      = str.find_first_of(delims, last_pos);
     }
 }
+*/
 
 void
 yh::util::set_casesensitive(std::string& str, const bool casesensitive)
@@ -289,6 +313,30 @@ yh::util::make_line(const std::vector<std::string>& tokens,
     }
 
     return line;
+}
+
+// ref : https://stackoverflow.com/questions/6059302/how-to-check-if-a-file-is-gzip-compressed
+bool
+yh::util::is_gzfile(const std::string& filename)
+{
+    std::ifstream file(filename, std::ifstream::binary);
+    if (false == file.is_open())
+    {
+        return false;
+    }
+
+    const unsigned char k_gzipfile_heads[2] = {0x1f, 0x8b};
+    unsigned char file_heads[2]             = {0x0, 0x0};
+
+    file.read((char*)file_heads, 2);
+    file.close();
+
+    if ((k_gzipfile_heads[0] == file_heads[0]) && (k_gzipfile_heads[1] == file_heads[1]))
+    {
+        return true;
+    }
+
+    return false;
 }
 
 // TODO

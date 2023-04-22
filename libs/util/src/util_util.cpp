@@ -1,5 +1,15 @@
+/**
+ * @file util.cpp
+ * @author Cheon Younghoe (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-04-22
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 
-#include "myname_util.hpp"
+#include "util_util.hpp"
 #include <algorithm>
 #include <cctype>
 #include <chrono>
@@ -10,55 +20,55 @@
 #include <unistd.h>
 
 std::string
-myname::get_current_time()
+yh::util::get_current_time()
 {
     auto today     = std::chrono::system_clock::now();
     auto tt        = std::chrono::system_clock::to_time_t(today);
     auto ctime_str = std::string(std::ctime(&tt));
 
-    myname::change_str(ctime_str, std::string("\n"), std::string(""));
+    yh::util::change_str(ctime_str, std::string("\n"), std::string(""));
 
     return ctime_str;
 }
 
 std::string
-myname::get_current_dir()
+yh::util::get_current_dir()
 {
-    auto currentPath = myname::fs_tt::current_path();
+    auto currentPath = yh::util::fs_tt::current_path();
 
     return currentPath.native();
 }
 
 std::string
-myname::get_user()
+yh::util::get_user()
 {
-    char user[myname::k_buffer_size_1k];
+    char user[yh::util::k_buffer_size_1k];
 
-    if (0 == getlogin_r(user, myname::k_buffer_size_1k))
+    if (0 == getlogin_r(user, yh::util::k_buffer_size_1k))
         return std::string(user);
     else
         return std::string("");
 }
 
 std::string
-myname::get_host_name()
+yh::util::get_host_name()
 {
-    char host_name[myname::k_buffer_size_1k];
+    char host_name[yh::util::k_buffer_size_1k];
 
-    if (0 == gethostname(host_name, myname::k_buffer_size_1k))
+    if (0 == gethostname(host_name, yh::util::k_buffer_size_1k))
         return std::string(host_name);
     else
         return std::string("");
 }
 
 int
-myname::get_process_id()
+yh::util::get_process_id()
 {
     return getpid();
 }
 
 std::string
-myname::get_os_version()
+yh::util::get_os_version()
 {
     struct utsname buf;
 
@@ -73,7 +83,7 @@ myname::get_os_version()
 }
 
 std::string
-myname::get_cpu_info()
+yh::util::get_cpu_info()
 {
     const std::string k_cpu_info_filename = std::string("/proc/cpuinfo");
 
@@ -93,7 +103,7 @@ myname::get_cpu_info()
 
     while (std::getline(file, line))
     {
-        myname::tokenize(line, tokens, delims);
+        yh::util::tokenize(line, tokens, delims);
 
         if (true == tokens.empty())
         {
@@ -130,7 +140,7 @@ myname::get_cpu_info()
 }
 
 void
-myname::change_str(std::string& str, const std::string& from, const std::string& to)
+yh::util::change_str(std::string& str, const std::string& from, const std::string& to)
 {
     if (true == from.empty())
     {
@@ -146,7 +156,7 @@ myname::change_str(std::string& str, const std::string& from, const std::string&
 }
 
 void
-myname::tokenize(std::string_view str, std::vector<std::string>& tokens, std::string_view delims)
+yh::util::tokenize(std::string_view str, std::vector<std::string>& tokens, std::string_view delims)
 {
     tokens.clear();
 
@@ -163,41 +173,41 @@ myname::tokenize(std::string_view str, std::vector<std::string>& tokens, std::st
 }
 
 void
-myname::set_casesensitive(std::string& str, const bool casesensitive)
+yh::util::set_casesensitive(std::string& str, const bool casesensitive)
 {
     if (false == casesensitive)
-        myname::toLower_str(str);
+        yh::util::to_lower_str(str);
 }
 
 void
-myname::toUpper_str(std::string& str)
+yh::util::to_upper_str(std::string& str)
 {
     std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::toupper(c); });
 }
 
 void
-myname::toLower_str(std::string& str)
+yh::util::to_lower_str(std::string& str)
 {
     std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::tolower(c); });
 }
 
 bool
-myname::is_equal(const std::string& str1, const std::string& str2, const bool casesensitive)
+yh::util::is_equal(const std::string& str1, const std::string& str2, const bool casesensitive)
 {
     if (true == casesensitive)
-        return myname::is_equal_casesensitive(str1, str2);
+        return yh::util::is_equal_casesensitive(str1, str2);
     else
-        return myname::is_equal_incasesensitive(str1, str2);
+        return yh::util::is_equal_incasesensitive(str1, str2);
 }
 
 bool
-myname::is_equal_casesensitive(const std::string& str1, const std::string& str2)
+yh::util::is_equal_casesensitive(const std::string& str1, const std::string& str2)
 {
     return str1 == str2;
 }
 
 bool
-myname::is_equal_incasesensitive(const std::string& str1, const std::string& str2)
+yh::util::is_equal_incasesensitive(const std::string& str1, const std::string& str2)
 {
     return std::equal(str1.begin(),
                       str1.end(),
@@ -207,28 +217,28 @@ myname::is_equal_incasesensitive(const std::string& str1, const std::string& str
 }
 
 bool
-myname::is_equal(const unsigned char str1, const unsigned char str2, const bool casesensitive)
+yh::util::is_equal(const unsigned char str1, const unsigned char str2, const bool casesensitive)
 {
     if (true == casesensitive)
-        return myname::is_equal(str1, str2);
+        return yh::util::is_equal(str1, str2);
     else
-        return myname::is_equal_incasesensitive(str1, str2);
+        return yh::util::is_equal_incasesensitive(str1, str2);
 }
 
 bool
-myname::is_equal_casesensitive(const unsigned char str1, const unsigned char str2)
+yh::util::is_equal_casesensitive(const unsigned char str1, const unsigned char str2)
 {
     return str1 == str2;
 }
 
 bool
-myname::is_equal_incasesensitive(const unsigned char str1, const unsigned char str2)
+yh::util::is_equal_incasesensitive(const unsigned char str1, const unsigned char str2)
 {
     return tolower(str1) == tolower(str2);
 }
 
 bool
-myname::is_equal(const float f1, const float f2, const float max_rel_diff)
+yh::util::is_equal(const float f1, const float f2, const float max_rel_diff)
 {
     float diff    = fabsf(f1 - f2);
     float ff1     = fabsf(f1);
@@ -247,7 +257,7 @@ myname::is_equal(const float f1, const float f2, const float max_rel_diff)
 }
 
 bool
-myname::is_equal(const double d1, const double d2, const double max_rel_diff)
+yh::util::is_equal(const double d1, const double d2, const double max_rel_diff)
 {
     double diff    = fabs(d1 - d2);
     double fd1     = fabs(d1);
@@ -266,10 +276,10 @@ myname::is_equal(const double d1, const double d2, const double max_rel_diff)
 }
 
 std::string
-myname::make_line(const std::vector<std::string>& tokens,
-             const std::size_t from_pos,
-             const std::size_t to_pos,
-             const std::string& delims)
+yh::util::make_line(const std::vector<std::string>& tokens,
+                    const std::size_t from_pos,
+                    const std::size_t to_pos,
+                    const std::string& delims)
 {
     auto line = std::string("");
     for (auto pos = from_pos; pos < to_pos; ++pos)
@@ -283,7 +293,7 @@ myname::make_line(const std::vector<std::string>& tokens,
 
 // TODO
 double
-myname::atof2(const std::string& str)
+yh::util::atof2(const std::string& str)
 {
     return std::atof(str.c_str());
 }

@@ -1,11 +1,21 @@
+/**
+ * @file util_runtime.hpp
+ * @author Cheon Younghoe (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-04-22
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 
-#ifndef MYNAME_RUNTIME_H
-#define MYNAME_RUNTIME_H
+#ifndef YH_UTIL_RUNTIME_H
+#define YH_UTIL_RUNTIME_H
 
 #include <chrono>
 #include <memory>
 
-namespace myname
+namespace yh::util
 {
     class Runtime;
     using pRuntime = std::shared_ptr<Runtime>;
@@ -29,5 +39,6 @@ namespace myname
             std::chrono::time_point<std::chrono::high_resolution_clock> m_wall_time;
     };
 
-} // namespace myname
-#endif // MYNAME_RUNTIME_H
+} // namespace yh::util
+
+#endif // YH_UTIL_RUNTIME_H

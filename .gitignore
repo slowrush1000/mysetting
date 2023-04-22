@@ -5,7 +5,8 @@ build/.cmake
 build/.qt
 build/CMake*
 build/debug/
-build/doc/
+build/docs/
+build/libs/
 build/release/
 build/src/
 build/.ninja*
@@ -13,9 +14,8 @@ build/build.*
 build/cmake*
 build/compile_*
 build/install_*
-doc/html/
-doc/latex/
+docs/html/
+docs/latex/
 install/
 src/tags
 src/*.sw*
-src/git.hpp

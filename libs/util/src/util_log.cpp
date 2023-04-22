@@ -1,8 +1,18 @@
+/**
+ * @file log.cpp
+ * @author Cheon Younghoe (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-04-22
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 
-#include "myname_log.hpp"
+#include "util_log.hpp"
 #include <iostream>
 
-myname::Log::Log()
+yh::util::Log::Log()
 {
     try
     {
@@ -29,7 +39,7 @@ myname::Log::Log()
     }
 }
 
-myname::Log::Log(const std::string& _logger_name, const std::string& log_filename)
+yh::util::Log::Log(const std::string& _logger_name, const std::string& log_filename)
     : m_logger_name(_logger_name)
     , m_log_filename(log_filename)
 {
@@ -58,42 +68,42 @@ myname::Log::Log(const std::string& _logger_name, const std::string& log_filenam
     }
 }
 
-myname::Log::~Log()
+yh::util::Log::~Log()
 {
 }
 
 std::shared_ptr<spdlog::logger>
-myname::Log::default_logger(const std::string& default_logger_name)
+yh::util::Log::default_logger(const std::string& default_logger_name)
 {
     return spdlog::get(default_logger_name);
 }
 
 void
-myname::Log::set_logger_name(const std::string& logger_name)
+yh::util::Log::set_logger_name(const std::string& logger_name)
 {
     m_logger_name = logger_name;
 }
 
 const std::string&
-myname::Log::logger_name() const
+yh::util::Log::logger_name() const
 {
     return m_logger_name;
 }
 
 void
-myname::Log::set_log_filename(const std::string& log_filename)
+yh::util::Log::set_log_filename(const std::string& log_filename)
 {
     m_log_filename = log_filename;
 }
 
 const std::string&
-myname::Log::log_filename() const
+yh::util::Log::log_filename() const
 {
     return m_log_filename;
 }
 
 void
-myname::Log::change_log_level(const spdlog::level::level_enum log_level)
+yh::util::Log::change_log_level(const spdlog::level::level_enum log_level)
 {
     if ((nullptr != m_logger) && (nullptr != m_file_sink) && (nullptr != m_console_sink))
     {

@@ -1,8 +1,21 @@
-#ifndef MYNAME_VERSION_H
-#define MYNAME_VERSION_H
+/**
+ * @file util_version.hpp
+ * @author Cheon Younghoe (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-04-22
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
+#ifndef YH_UTIL_VERSION_H
+#define YH_UTIL_VERSION_H
+
 #include <memory>
 #include <string>
-namespace myname
+
+namespace yh::util
 {
     class Version;
     using pVersion = std::shared_ptr<Version>;
@@ -37,5 +50,6 @@ namespace myname
             std::string m_build_date = std::string(__DATE__);
             std::string m_build_time = std::string(__TIME__);
     };
-} // namespace myname
-#endif // MYNAME_VERSION_H
+} // namespace yh::util
+
+#endif // YH_UTIL_VERSION_H

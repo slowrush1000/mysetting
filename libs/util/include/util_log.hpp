@@ -1,6 +1,16 @@
+/**
+ * @file util_log.hpp
+ * @author Cheon Younghoe (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-04-22
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 
-#ifndef MYNAME_LOG_H
-#define MYNAME_LOG_H
+#ifndef YH_UTIL_LOG_H
+#define YH_UTIL_LOG_H
 
 #include "spdlog/common.h"
 #include "spdlog/sinks/basic_file_sink.h"
@@ -9,7 +19,7 @@
 #include <memory>
 #include <string>
 
-namespace myname
+namespace yh::util
 {
     const std::string k_default_logger_name = std::string("myname");
     const std::string k_log_filename        = std::string("myname.log");
@@ -83,5 +93,6 @@ namespace myname
             std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> m_console_sink = nullptr;
             std::shared_ptr<spdlog::sinks::basic_file_sink_mt> m_file_sink      = nullptr;
     };
-} // namespace myname
-#endif // MYNAME_LOG_H
+} // namespace yh::util
+
+#endif // YH_UTIL_LOG_H

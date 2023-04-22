@@ -1,6 +1,16 @@
+/**
+ * @file util_util.hpp
+ * @author Cheon Younghoe (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-04-22
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 
-#ifndef MYNAME_UTIL_H
-#define MYNAME_UTIL_H
+#ifndef YH_UTIL_UTIL_H
+#define YH_UTIL_UTIL_H
 
 #include <cfloat>
 #include <filesystem>
@@ -8,7 +18,7 @@
 #include <string_view>
 #include <vector>
 
-namespace myname
+namespace yh::util
 {
     namespace fs_tt                    = std::filesystem;
     const std::size_t k_buffer_size_1k = 1024;
@@ -39,5 +49,6 @@ namespace myname
                           const std::string& delims = std::string(" "));
     // TODO
     double atof2(const std::string& str);
-} // namespace myname
-#endif // MYNAME_UTIL_H
+} // namespace yh::util
+
+#endif // YH_UTIL_UTIL_H

@@ -1,33 +1,43 @@
+/**
+ * @file runtime.cpp
+ * @author Cheon Younghoe (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-04-22
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 
-#include "myname_runtime.hpp"
+#include "util_runtime.hpp"
 #include <fmt/printf.h>
 #include <sys/resource.h>
 #include <sys/time.h>
 
-myname::Runtime::Runtime()
+yh::util::Runtime::Runtime()
 {
     m_cpu_time  = std::clock();
     m_wall_time = std::chrono::high_resolution_clock::now();
 }
 
-myname::Runtime::~Runtime()
+yh::util::Runtime::~Runtime()
 {
 }
 
 double
-myname::Runtime::cpu_time_secs()
+yh::util::Runtime::cpu_time_secs()
 {
     return double(std::clock() - m_cpu_time) / double(CLOCKS_PER_SEC);
 }
 
 double
-myname::Runtime::wall_time_secs()
+yh::util::Runtime::wall_time_secs()
 {
     return std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - m_wall_time).count();
 }
 
 std::size_t
-myname::Runtime::peak_rss_bytes()
+yh::util::Runtime::peak_rss_bytes()
 {
 #if defined(_WIN32)
     /* Windows -------------------------------------------------- */
@@ -68,7 +78,7 @@ myname::Runtime::peak_rss_bytes()
 }
 
 std::size_t
-myname::Runtime::current_rss_bytes()
+yh::util::Runtime::current_rss_bytes()
 {
 #if defined(_WIN32)
     /* Windows -------------------------------------------------- */
@@ -110,13 +120,13 @@ myname::Runtime::current_rss_bytes()
 }
 
 std::string
-myname::Runtime::str()
+yh::util::Runtime::str()
 {
     auto str = fmt::sprintf("cpu %.1f secs, wall %.1f secs, peak %.1f MB, current %.1f MB",
-                                          this->cpu_time_secs(),
-                                          this->wall_time_secs(),
-                                          this->peak_rss_bytes() / 1.0e6,
-                                          this->current_rss_bytes() / 1.0e6);
+                            this->cpu_time_secs(),
+                            this->wall_time_secs(),
+                            this->peak_rss_bytes() / 1.0e6,
+                            this->current_rss_bytes() / 1.0e6);
 
     return str;
 }

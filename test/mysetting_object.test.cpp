@@ -1,5 +1,5 @@
 /**
- * @file util_object.test.cpp
+ * @file T_PROGRAM_object.test.cpp
  * @author Cheon Younghoe (you@domain.com)
  * @brief
  * @version 0.1
@@ -9,7 +9,7 @@
  *
  */
 
-#include "../include/mysetting_object.hpp"
+#include "../include/T_PROGRAM_object.hpp"
 #include "gtest/gtest.h"
 
 TEST(OJBECT_TEST, init)

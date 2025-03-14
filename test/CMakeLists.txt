@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18.0)
-project(mysetting.test)
-set(PROGRAM_NAME                                "mysetting")
+project(T_PROJECT.test)
+set(PROGRAM_NAME                                "T_PROGRAM")
 
 # program name/build dir
 set(RUNTIME_OUTPUT_DIRECTORY                    "${CMAKE_SOURCE_DIR}/build/release")
@@ -20,9 +20,9 @@ elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
 endif()
 
 # sources/headers
-set(PROJECT_TEST_MAIN_SOURCE                    "mysetting_main.test.cpp")
+set(PROJECT_TEST_MAIN_SOURCE                    "T_PROGRAM_main.test.cpp")
 set(PROJECT_TEST_SOURCES                             
-                                                "mysetting_object.test.cpp"
+                                                "T_PROGRAM_object.test.cpp"
                                                 )
 
 # googletest : make & ./program_name.test.exe

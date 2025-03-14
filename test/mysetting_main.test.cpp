@@ -1,5 +1,5 @@
 /**
- * @file mysetting_main.test.cpp
+ * @file T_PROGRAM_main.test.cpp
  * @author Cheon Younghoe (you@domain.com)
  * @brief
  * @version 0.1

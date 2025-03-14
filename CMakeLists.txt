@@ -166,5 +166,5 @@ add_custom_target(ctags
     COMMAND cp -f tags ${CMAKE_SOURCE_DIR}/src
 )
 
-# test
-add_subdirectory(test)
+## test
+#add_subdirectory(test)

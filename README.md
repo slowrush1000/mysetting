@@ -1,5 +1,30 @@
 # T_PROJECT
 
+## dev_20250314.0.0
+1. vscode extension
+    Black Formatter
+    C/C++
+    C/C++ Extension Pack
+    CMake
+    CMake Tools
+    Doxygen Documentation Generator
+    Git Graph
+    Git History
+    IntelliCode
+    IntelliCode API Usage Examples
+    Makefile Tools
+    PyLance
+    Python
+    Python Debugger
+    Rainbow CSV
+    rust-analyzer
+    VS Code Counter
+    C/C++ Themes
+
+    vim
+    Python Indent
+    Vim
+
 ## dev_20230422.0.0
 1. change setter/getter format
     set_name, name

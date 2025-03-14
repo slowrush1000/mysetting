@@ -1,5 +1,5 @@
 /**
- * @file mysetting_object.hpp
+ * @file T_PROGRAM_object.hpp
  * @author Cheon Younghoe (you@domain.com)
  * @brief
  * @version 0.1
@@ -9,11 +9,11 @@
  *
  */
 
-#ifndef MYSETTING_OBJECT_H
-#define MYSETTING_OBJECT_H
+#ifndef T_PROJECT_OBJECT_H
+#define T_PROJECT_OBJECT_H
 
-namespace mysetting
+namespace T_PROGRAM
 {
 }
 
-#endif // MYSETTING_OBJECT_H
+#endif // T_PROJECT_OBJECT_H

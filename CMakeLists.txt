@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18.0)
-project(mysetting)
-set(PROGRAM_NAME                                "mysetting")
+project(T_PROJECT)
+set(PROGRAM_NAME                            "T_PROGRAM")
 
 # Location of additional cmake modules 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" "${CMAKE_MODULE_PATH}")
@@ -20,15 +20,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED             ON)
 #add_subdirectory(${TOMLPLUSPLUS_DIR})
 
 # libraries
-set(PROJECT_NAME                            "mysetting")
+set(PROJECT_NAME                            "T_PROJECT")
 set(PROJECT_SRC_DIR                         "src")
-set(PROJECT_LIBS_DIR                        "libs")
-set(PROJECT_LIBS                            
-                                            "util")
-
-foreach(LIBRARY ${PROJECT_LIBS})
-    add_subdirectory("${PROJECT_LIBS_DIR}/${LIBRARY}")
-endforeach(LIBRARY ${PROJECT_LIBS})
+#set(PROJECT_LIBS_DIR                        "libs")
+#set(PROJECT_LIBS                            
+#                                            "util")
+#foreach(LIBRARY ${PROJECT_LIBS})
+#    add_subdirectory("${PROJECT_LIBS_DIR}/${LIBRARY}")
+#endforeach(LIBRARY ${PROJECT_LIBS})
 add_subdirectory(docs)
 
 # dir
@@ -37,7 +36,7 @@ set(INC_DIR                                     "include")
 
 #set(TEST_SRC_DIR                               "${CMAKE_SOURCE_DIR}/src")
 set(INSTALL_DIR                                 "${CMAKE_SOURCE_DIR}/install")
-set(EXTERN_DIR                                  "/media/PROJECT02/extern")
+#set(EXTERN_DIR                                  "/media/PROJECT02/extern")
 #set(EXTERN_DIR                                 "../../../extern")
 
 # program name/build dir
@@ -62,15 +61,15 @@ elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
 endif()
 
 # sources/headers
-set(PROJECT_MAIN_SOURCE                         "${SRC_DIR}/mysetting_main.cpp")
-set(PROJECT_MAIN_HEADER                         "${SRC_DIR}/mysetting_main.hpp")
+set(PROJECT_MAIN_SOURCE                         "${SRC_DIR}/T_PROGRAM_main.cpp")
+set(PROJECT_MAIN_HEADER                         "${SRC_DIR}/T_PROGRAM_main.hpp")
 set(PROJECT_SOURCES                             "")
 set(PROJECT_HEADERS                             "")
 set(PROJECT_SOURCES                             
-                                               "${SRC_DIR}/mysetting_object.cpp"
+                                               "${SRC_DIR}/T_PROGRAM_object.cpp"
                                                )
 set(PROJECT_HEADERS                             
-                                               "${INC_DIR}/mysetting_object.hpp"
+                                               "${INC_DIR}/T_PROGRAM_object.hpp"
                                                )
 # build : make -j
 include_directories(${INC_DIR})
@@ -98,51 +97,51 @@ set_target_properties(${PROJECT_LIB_NAME} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 #endif(OPENMP_FOUND)
 
-# yh::util
-set(UTIL_DIR                              "${CMAKE_SOURCE_DIR}/libs")
-#set(UTIL_DIR                              "${CMAKE_SOURCE_DIR}/libs/util")
-#set(UTIL_DIR                              "/media/PROJECT02/extern/spdlog")
-set(UTIL_INC_DIR                          "${UTIL_DIR}")
-if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-set(UTIL_LIBRARIES                        "util.dbg")
-elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
-set(UTIL_LIBRARIES                        "util")
-endif()
-include_directories(${UTIL_INC_DIR})
-target_link_libraries(${PROJECT_EXE_NAME}        ${UTIL_LIBRARIES})
+## yh::util
+#set(UTIL_DIR                              "${CMAKE_SOURCE_DIR}/libs")
+##set(UTIL_DIR                              "${CMAKE_SOURCE_DIR}/libs/util")
+##set(UTIL_DIR                              "/media/PROJECT02/extern/spdlog")
+#set(UTIL_INC_DIR                          "${UTIL_DIR}")
+#if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+#set(UTIL_LIBRARIES                        "util.dbg")
+#elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
+#set(UTIL_LIBRARIES                        "util")
+#endif()
+#include_directories(${UTIL_INC_DIR})
+#target_link_libraries(${PROJECT_EXE_NAME}        ${UTIL_LIBRARIES})
 
-# spdlog
-set(SPDLOG_DIR                              "${EXTERN_DIR}/spdlog")
-#set(SPDLOG_DIR                              "/media/PROJECT02/extern/spdlog")
-set(SPDLOG_INC_DIR                          "${SPDLOG_DIR}/include")
-set(SPDLOG_LIBRARIES                        "${SPDLOG_DIR}/build/libspdlog.a")
-include_directories(${SPDLOG_INC_DIR})
-target_link_libraries(${PROJECT_EXE_NAME}        ${SPDLOG_LIBRARIES})
-#target_link_libraries(${PROJECT_TEST_EXE_NAME}   ${SPDLOG_LIBRARIES})
-##include_directories("../{SPDLOG_DIR}/include")
-##target_link_libraries(${PROJECT_EXE_NAME}        spdlog)
-##find_package(spdlog)
-##if(spdlog_FOUND)
-##    target_link_libraries(${PROJECT_EXE_NAME} spdlog)
-##endif(spdlog_FOUND)
+## spdlog
+#set(SPDLOG_DIR                              "${EXTERN_DIR}/spdlog")
+##set(SPDLOG_DIR                              "/media/PROJECT02/extern/spdlog")
+#set(SPDLOG_INC_DIR                          "${SPDLOG_DIR}/include")
+#set(SPDLOG_LIBRARIES                        "${SPDLOG_DIR}/build/libspdlog.a")
+#include_directories(${SPDLOG_INC_DIR})
+#target_link_libraries(${PROJECT_EXE_NAME}        ${SPDLOG_LIBRARIES})
+##target_link_libraries(${PROJECT_TEST_EXE_NAME}   ${SPDLOG_LIBRARIES})
+###include_directories("../{SPDLOG_DIR}/include")
+###target_link_libraries(${PROJECT_EXE_NAME}        spdlog)
+###find_package(spdlog)
+###if(spdlog_FOUND)
+###    target_link_libraries(${PROJECT_EXE_NAME} spdlog)
+###endif(spdlog_FOUND)
 
-# gzstream
-find_package(GZSTREAM)
-if (GZSTREAM_FOUND)
-    include_directories(${GZSTREAM_INCLUDE_DIRS})
-    target_link_libraries(${PROJECT_EXE_NAME} ${GZSTREAM_LIBRARIES})
-#    target_link_libraries(${PROJECT_TEST_EXE_NAME} ${GZSTREAM_LIBRARIES})
-    target_link_libraries(${PROJECT_EXE_NAME} z)
-#    target_link_libraries(${PROJECT_TEST_EXE_NAME} z)
-endif(GZSTREAM_FOUND)
-
-# fmt
-find_package(fmt)
-if(fmt_FOUND)
-    #    include_directories(${fmt_INCLUDE_DIRS})
-    target_link_libraries(${PROJECT_EXE_NAME} fmt::fmt)
-#    target_link_libraries(${PROJECT_TEST_EXE_NAME} fmt::fmt)
-endif(fmt_FOUND)
+## gzstream
+#find_package(GZSTREAM)
+#if (GZSTREAM_FOUND)
+#    include_directories(${GZSTREAM_INCLUDE_DIRS})
+#    target_link_libraries(${PROJECT_EXE_NAME} ${GZSTREAM_LIBRARIES})
+##    target_link_libraries(${PROJECT_TEST_EXE_NAME} ${GZSTREAM_LIBRARIES})
+#    target_link_libraries(${PROJECT_EXE_NAME} z)
+##    target_link_libraries(${PROJECT_TEST_EXE_NAME} z)
+#endif(GZSTREAM_FOUND)
+#
+## fmt
+#find_package(fmt)
+#if(fmt_FOUND)
+#    #    include_directories(${fmt_INCLUDE_DIRS})
+#    target_link_libraries(${PROJECT_EXE_NAME} fmt::fmt)
+##    target_link_libraries(${PROJECT_TEST_EXE_NAME} fmt::fmt)
+#endif(fmt_FOUND)
 
 ## tcl/tk
 #find_package(TCL)

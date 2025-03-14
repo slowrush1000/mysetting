@@ -1,5 +1,5 @@
 /**
- * @file mysetting_object.cpp
+ * @file T_PROGRAM_object.cpp
  * @author Cheon Younghoe (you@domain.com)
  * @brief
  * @version 0.1
@@ -9,4 +9,4 @@
  *
  */
 
-#include "mysetting_object.hpp"
+#include "T_PROGRAM_object.hpp"
